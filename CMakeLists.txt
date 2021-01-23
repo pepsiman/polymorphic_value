@@ -50,6 +50,7 @@ if(POLYMORPHIC_IS_NOT_SUBPROJECT)
         FetchContent_Declare(
             catch2
             GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+            GIT_TAG devel
         )
 
         FetchContent_GetProperties(catch2)
@@ -62,7 +63,7 @@ if(POLYMORPHIC_IS_NOT_SUBPROJECT)
         target_link_libraries(test_polymorphic_value
             PRIVATE
                 polymorphic_value::polymorphic_value
-                Catch2::Catch2
+                Catch2::Catch2WithMain
         )
 
         target_compile_options(test_polymorphic_value
@@ -117,7 +118,7 @@ if(POLYMORPHIC_IS_NOT_SUBPROJECT)
             WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
         )
 
-        list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/contrib)
+        list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
         include(Catch)
         catch_discover_tests(test_polymorphic_value)
     endif(${BUILD_TESTING})
